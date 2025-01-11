@@ -205,16 +205,18 @@ if __name__ == "__main__":
         config.AVAILABLE_MODELS, title="Select model for Speaker 1"
     )
     menu_entry_index = terminal_menu.show()
-    speaker1_model = config.AVAILABLE_MODELS[menu_entry_index]
-    console.print(f"Selected: [bold magenta]{speaker1_model}[/]")
+    display_name = config.AVAILABLE_MODELS[menu_entry_index]
+    speaker1_model = config.MODEL_IDS[display_name]
+    console.print(f"Selected: [bold magenta]{display_name}[/]")
 
     console.print(config.SPEAKER2_CONFIG)
     terminal_menu = TerminalMenu(
         config.AVAILABLE_MODELS, title="Select model for Speaker 2"
     )
     menu_entry_index = terminal_menu.show()
-    speaker2_model = config.AVAILABLE_MODELS[menu_entry_index]
-    console.print(f"Selected: [bold magenta]{speaker2_model}[/]")
+    display_name = config.AVAILABLE_MODELS[menu_entry_index]
+    speaker2_model = config.MODEL_IDS[display_name]
+    console.print(f"Selected: [bold magenta]{display_name}[/]")
 
     console.print(config.DEBATE_SETUP)
     motion = input("Enter the debate motion: ")
