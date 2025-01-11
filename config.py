@@ -3,7 +3,34 @@ Configuration settings for the debate application.
 """
 
 # Available models for the debate
-AVAILABLE_MODELS = ["o1", "gpt-4o", "gpt-4o-mini"]
+AVAILABLE_MODELS = [
+    "o1", 
+    "gpt-4o", 
+    "gpt-4o-mini",
+    "gemini-2.0-flash-thinking",
+    "gemini-2.0-flash",
+    "gemini",
+    "grok-2",
+    "claude-3.5-haiku",
+    "claude-3.5-sonnet",
+    "qwq-32b-preview",
+    "deepseek-v3",
+]
+
+# Keep the original model IDs for API calls
+MODEL_IDS = {
+    "o1": "o1",
+    "gpt-4o": "gpt-4o",
+    "gpt-4o-mini": "gpt-4o-mini",
+    "gemini-2.0-flash-thinking": "google/gemini-2.0-flash-thinking-exp:free",
+    "gemini-2.0-flash": "google/gemini-2.0-flash-exp:free",
+    "gemini": "google/gemini-exp-1206:free",
+    "grok-2": "x-ai/grok-2-1212",
+    "claude-3.5-haiku": "anthropic/claude-3.5-haiku-20241022:beta",
+    "claude-3.5-sonnet": "anthropic/claude-3.5-sonnet:beta",
+    "qwq-32b-preview": "qwen/qwq-32b-preview",
+    "deepseek-v3": "deepseek/deepseek-chat",
+}
 
 # UI/Display settings
 DEBATE_START_BANNER = "[bold white on blue]=== DEBATE START ===[/]"

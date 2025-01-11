@@ -2,6 +2,9 @@
 app.py
 """
 
+# Standard imports
+import os
+
 # Third-party imports
 import instructor
 from openai import OpenAI
@@ -15,12 +18,21 @@ from typing import List, Dict
 import config
 from reply import Reply
 
-# Patch the OpenAI client
-speaker1 = instructor.from_openai(OpenAI())
-speaker2 = instructor.from_openai(OpenAI())
-
 # Initialize the terminal console
 console = Console()
+
+
+def get_openai_client(model: str) -> OpenAI:
+    """
+    Returns an OpenAI client configured for the specified model.
+    Uses OpenRouter for non-OpenAI models.
+    """
+    if model.startswith(("google/", "x-ai/", "anthropic/")):
+        return OpenAI(
+            base_url="https://openrouter.ai/api/v1",
+            api_key=os.getenv("OPENROUTER_API_KEY")
+        )
+    return OpenAI()
 
 
 def handle_forfeit(reply: Reply, speaker_title: str, turn_count: int) -> None:
@@ -46,7 +58,7 @@ def handle_forfeit(reply: Reply, speaker_title: str, turn_count: int) -> None:
 
 
 def perform_speaker_turn(
-    speaker,
+    speaker: OpenAI,
     speaker_messages: List[Dict[str, str]],
     user_prompt: str,
     model: str,
@@ -71,7 +83,7 @@ def perform_speaker_turn(
 
     Returns:
         Reply: The generated reply object.
-    """
+    """    
     reply = speaker.chat.completions.create(
         model=model,
         response_model=Reply,
@@ -124,7 +136,7 @@ def debate(motion: str, speaker1_model: str, speaker2_model: str) -> str:
     # Speaker 1's opening argument
     turn_count += 1  # Increment turn count
     reply1 = perform_speaker_turn(
-        speaker=speaker1,
+        speaker=instructor.from_openai(get_openai_client(speaker1_model)),
         speaker_messages=speaker1_messages,
         user_prompt=config.OPENING_PROMPT,
         model=speaker1_model,
@@ -145,7 +157,7 @@ def debate(motion: str, speaker1_model: str, speaker2_model: str) -> str:
         turn_count += 1  # Increment turn count
         last_speaker1_content = speaker1_messages[-1]["content"]
         reply2 = perform_speaker_turn(
-            speaker=speaker2,
+            speaker=instructor.from_openai(get_openai_client(speaker2_model)),
             speaker_messages=speaker2_messages,
             user_prompt=last_speaker1_content,
             model=speaker2_model,
@@ -167,7 +179,7 @@ def debate(motion: str, speaker1_model: str, speaker2_model: str) -> str:
         turn_count += 1  # Increment turn count
         last_speaker2_content = speaker2_messages[-1]["content"]
         reply1 = perform_speaker_turn(
-            speaker=speaker1,
+            speaker=instructor.from_openai(get_openai_client(speaker1_model)),
             speaker_messages=speaker1_messages,
             user_prompt=last_speaker2_content,
             model=speaker1_model,
