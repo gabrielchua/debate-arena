@@ -30,7 +30,7 @@ class Reply(BaseModel):
     are_you_repeating_previous_arguments: bool = Field(
         description="Flag indicating whether you are about torepeating previous arguments"
     )
-    reason_for_forfeit: str = Field(
+    reason_for_forfeit: str | None = Field(
         default=None,
         description="The reason for forfeiting the debate. Can be null if you do not intend to forfeit the debate. Be specific about why you are forfeiting. Keep your response less than 500 characters.",
         max_length=500,

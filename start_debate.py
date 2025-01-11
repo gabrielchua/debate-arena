@@ -88,6 +88,7 @@ def perform_speaker_turn(
         model=model,
         response_model=Reply,
         messages=speaker_messages + [{"role": "user", "content": user_prompt}],
+        max_retries=5,
     )
 
     # If not a forfeit, print the speaker's response and append it to messages
