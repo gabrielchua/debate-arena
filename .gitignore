@@ -1,0 +1,31 @@
+.DS_Store
+._*
+**/._*
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.fseventsd
+.VolumeIcon.icns
+.AppleDouble
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+*.swp
+*.swo
+*.lock
+*.tmp
+*.bak
+*.orig
+*.pyc
+__pycache__/
+*.log
+*.egg-info
+dist/
+build/
+env/
+venv/
+*.idea
+*.vscode
+*.env
+*.DS_Store
