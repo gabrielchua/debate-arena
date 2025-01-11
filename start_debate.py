@@ -47,7 +47,6 @@ def handle_forfeit(reply: Reply, speaker_title: str, turn_count: int) -> None:
     Returns:
         None
     """
-    console.print(f"{config.DEBATE_STATS}\nTotal turns: {turn_count}")
     console.print(
         Panel(
             Text(reply.reason_for_forfeit_text, style=config.FORFEIT_TEXT_STYLE),
@@ -55,6 +54,7 @@ def handle_forfeit(reply: Reply, speaker_title: str, turn_count: int) -> None:
             border_style=config.FORFEIT_PANEL_STYLE,
         )
     )
+    console.print(f"{config.DEBATE_STATS}\nTotal turns: {turn_count}")
 
 
 def perform_speaker_turn(
