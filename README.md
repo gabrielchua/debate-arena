@@ -1,6 +1,10 @@
 # 🎭 Debate Arena
 
-An AI debate simulation platform where language models engage in structured debates on user-provided motions.
+Simulate language models engaging in structured debates on user-provided motions.
+
+<p align="center">
+  <img src="./demo.gif" width="70%" alt="Debate Arena Demo">
+</p>
 
 ## ✨ Features
 
