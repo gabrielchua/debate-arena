@@ -35,7 +35,7 @@ def get_openai_client(model: str) -> OpenAI:
     return OpenAI()
 
 
-def handle_forfeit(reply: Reply, speaker_title: str, turn_count: int) -> None:
+def handle_forfeit(reply: Reply, speaker_title: str, turn_count: int, model: str) -> None:
     """
     Prints forfeit information to the console.
 
@@ -43,6 +43,7 @@ def handle_forfeit(reply: Reply, speaker_title: str, turn_count: int) -> None:
         reply (Reply): The reply object containing forfeit information.
         speaker_title (str): The title of the speaker who forfeited.
         turn_count (int): The total number of turns in the debate.
+        model (str): The model used by the speaker.
 
     Returns:
         None
@@ -50,7 +51,7 @@ def handle_forfeit(reply: Reply, speaker_title: str, turn_count: int) -> None:
     console.print(
         Panel(
             Text(reply.reason_for_forfeit_text, style=config.FORFEIT_TEXT_STYLE),
-            title=f"{speaker_title} (Turn {turn_count})",
+            title=f"{speaker_title} ({model}) (Turn {turn_count})",
             border_style=config.FORFEIT_PANEL_STYLE,
         )
     )
@@ -96,7 +97,7 @@ def perform_speaker_turn(
         console.print(
             Panel(
                 Text(reply.response, style=text_style),
-                title=f"{speaker_title} (Turn {turn_count})",
+                title=f"{speaker_title} ({model}) (Turn {turn_count})",
                 border_style=panel_style,
             )
         )
@@ -149,7 +150,7 @@ def debate(motion: str, speaker1_model: str, speaker2_model: str) -> str:
 
     # Check for forfeit
     if reply1.to_forfeit_debate:
-        handle_forfeit(reply1, config.SPEAKER1_TITLE, turn_count)
+        handle_forfeit(reply1, config.SPEAKER1_TITLE, turn_count, speaker1_model)
         return config.SPEAKER1_FORFEIT_MSG
 
     # Debate loop
@@ -170,7 +171,7 @@ def debate(motion: str, speaker1_model: str, speaker2_model: str) -> str:
 
         # Check for forfeit
         if reply2.to_forfeit_debate:
-            handle_forfeit(reply2, config.SPEAKER2_TITLE, turn_count)
+            handle_forfeit(reply2, config.SPEAKER2_TITLE, turn_count, speaker2_model)
             return config.SPEAKER2_FORFEIT_MSG
 
         # Append the last speaker2 content as the next user prompt for speaker1
@@ -192,7 +193,7 @@ def debate(motion: str, speaker1_model: str, speaker2_model: str) -> str:
 
         # Check for forfeit
         if reply1.to_forfeit_debate:
-            handle_forfeit(reply1, config.SPEAKER1_TITLE, turn_count)
+            handle_forfeit(reply1, config.SPEAKER1_TITLE, turn_count, speaker1_model)
             return config.SPEAKER1_FORFEIT_MSG
 
         # Append the last speaker1 content as the next user prompt for speaker2
