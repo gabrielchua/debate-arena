@@ -7,14 +7,14 @@ AVAILABLE_MODELS = [
     "o1", 
     "gpt-4o", 
     "gpt-4o-mini",
-    "gemini-2.0-flash-thinking",
-    "gemini-2.0-flash",
-    "gemini",
+    # "gemini-2.0-flash-thinking",
+    # "gemini-2.0-flash",
+    # "gemini-exp-1206",
     "grok-2",
     "claude-3.5-haiku",
     "claude-3.5-sonnet",
-    "qwq-32b-preview",
-    "deepseek-v3",
+    # "qwq-32b-preview",
+    # "deepseek-v3",
 ]
 
 # Keep the original model IDs for API calls
@@ -24,7 +24,7 @@ MODEL_IDS = {
     "gpt-4o-mini": "gpt-4o-mini",
     "gemini-2.0-flash-thinking": "google/gemini-2.0-flash-thinking-exp:free",
     "gemini-2.0-flash": "google/gemini-2.0-flash-exp:free",
-    "gemini": "google/gemini-exp-1206:free",
+    "gemini-exp-1206": "google/gemini-exp-1206:free",
     "grok-2": "x-ai/grok-2-1212",
     "claude-3.5-haiku": "anthropic/claude-3.5-haiku-20241022:beta",
     "claude-3.5-sonnet": "anthropic/claude-3.5-sonnet:beta",

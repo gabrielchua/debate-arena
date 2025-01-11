@@ -4,6 +4,7 @@ app.py
 
 # Standard imports
 import os
+from typing import List, Dict
 
 # Third-party imports
 import instructor
@@ -12,7 +13,6 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.text import Text
 from simple_term_menu import TerminalMenu
-from typing import List, Dict
 
 # Local imports
 import config
